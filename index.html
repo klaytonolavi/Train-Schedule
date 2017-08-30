@@ -13,38 +13,76 @@
 <body>
 
 <div class="container">
-	<div class="jumbotron">
-  		<h1>Train Schedule</h1>
-				
-</div>
-	</div>
 
-	<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Search Parameters</h3>
-  </div>
-  <div class="panel-body">
-    <p>Search Term: <br>
-    <input type="text" name="searchBox">
-    </p>
-    <p>Number of Records to Retrieve: <br>
-    <input type="number" name="records">
-    </p>
-    <p>Start Year (optional): <br>
-    <input type="number" name="start-year">
-    </p>
-    <p>End Year (Optional): <br>
-    <input type="number" name="end-year">
-    </p>
-    <br>
-    <div class="btn-group" role="group" aria-label="...">
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1 class="text-center">Train Schedule</h1>
+        <h3 class="text-center">Take the train, go visit Grandma!</h3>
+      </div>
 
-  <button type="button" id="search" class="btn btn-default">Search</button>
-  <button type="button" class="btn btn-default">Clear Results</button>
- 
-</div>
-  </div>
-</div>
+      <div class="row">
+
+        <div class="col-lg-12">
+
+        <!-- Current Employees-->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Current Train Schedule</strong></h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover" id='train-table'>
+                <thead>
+                  <tr>
+                    <th>Train Name</th>
+                    <th>Destination</th>
+                    <th>Frequency (min)</th>
+                    <th>Next Arrival</th>
+                    <th>Minutes Away</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Add Employee  -->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Add Train</strong></h3>
+            </div>
+            <div class="panel-body">
+
+              <!-- Entry Form -->
+              <form>
+                <div class="form-group">
+                  <label for="train-name-input">Train Name</label>
+                  <input class="form-control" id="train-name-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="destination-input">Destination</label>
+                  <input class="form-control" id="destination-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="first-time-input">First Train Time (HH:mm - military time)</label>
+                  <input class="form-control" id="first-time-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="frequency-input">Frequency (min)</label>
+                  <input class="form-control" id="frequency-input" type="text">
+                </div>
+                <button class="btn btn-primary" id="add-train-btn" type="submit">Submit</button>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
 
 
