@@ -40,4 +40,13 @@ $("#add-train-btn").on("click", function(event) {
   console.log(newTrain.firstTrain);
   console.log(newTrain.frequency);
 
-  
+  // alert that a new train has been added
+  alert("Train successfully added");
+
+  // clears all input boxes
+  $("#train-name-input").val("");
+  $("#destination-input").val("");
+  $("#first-time-input").val("");
+  $("#frequency-input").val("");
+});
+
