@@ -6,6 +6,7 @@
     storageBucket: "first-project-klayton.appspot.com",
     messagingSenderId: "964868300557"
   };
+
   firebase.initializeApp(config);
 
 var database = firebase.database();
@@ -35,9 +36,9 @@ $("#add-train-btn").on("click", function(event) {
   database.ref().push(newTrain);
 
   // console log train data
-  console.log(newTrain.name);
-  console.log(newTrain.destination);
-  console.log(newTrain.firstTrain);
+  console.log(newTrain.trainName);
+  console.log(newTrain.trainDestination);
+  console.log(newTrain.firstTrainTime);
   console.log(newTrain.frequency);
 
   // alert that a new train has been added
@@ -56,13 +57,13 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
   // Store everything into a variable.
   var trainName = childSnapshot.val().name;
-  var destination = childSnapshot.val().role;
-  var firstTrainTime = childSnapshot.val().start;
-  var frequency = childSnapshot.val().rate;
+  var trainDestination = childSnapshot.val().destination;
+  var firstTrainTime = childSnapshot.val().firstTrainTime;
+  var frequency = childSnapshot.val().frequency;
 
   // Employee Info
   console.log(trainName);
-  console.log(destination);
+  console.log(trainDestination);
   console.log(firstTrainTime);
   console.log(frequency);
 
@@ -98,7 +99,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
   // Add each train's data into the table
-  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +
+  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
   frequency + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td><td>");
 });
 
