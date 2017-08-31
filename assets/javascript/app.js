@@ -26,19 +26,19 @@ $("#add-train-btn").on("click", function(event) {
 
   // Creates local "temporary" object for holding train data
   var newTrain = {
-    name: trainName,
-    Destination: trainDestination,
-    firstTrain: firstTrainTime,
-    frequency: frequency
+    localName: trainName,
+    localDestination: trainDestination,
+    localFirstTrain: firstTrainTime,
+    localFrequency: frequency
   };
 
   // Uploads train data to the database
   database.ref().push(newTrain);
 
   // console log train data
-  console.log(newTrain.trainName);
-  console.log(newTrain.trainDestination);
-  console.log(newTrain.firstTrainTime);
+  console.log(newTrain.name);
+  console.log(newTrain.Destination);
+  console.log(newTrain.firstTrain);
   console.log(newTrain.frequency);
 
   // alert that a new train has been added
@@ -56,10 +56,10 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(childSnapshot.val());
 
   // Store everything into a variable.
-  var trainName = childSnapshot.val().name;
-  var trainDestination = childSnapshot.val().destination;
-  var firstTrainTime = childSnapshot.val().firstTrainTime;
-  var frequency = childSnapshot.val().frequency;
+  var trainName = childSnapshot.val().localName;
+  var trainDestination = childSnapshot.val().localDestination;
+  var firstTrainTime = childSnapshot.val().localFirstTrain;
+  var frequency = childSnapshot.val().localFrequency;
 
   // Employee Info
   console.log(trainName);
@@ -69,15 +69,16 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
  
   // Assumptions
-    var tFrequency = $("#frequency-input").val().trim();
+    // var tFrequency = $("#frequency-input").val().trim();
 
-    // Time is 3:30 AM - without a date it will assume today. 
-    var firstTime = $("#first-time-input").val().trim();
+    // // Time is 3:30 AM - without a date it will assume today. 
+    // var firstTime = $("#first-time-input").val().trim();
 
     // First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+    var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
     console.log(firstTimeConverted);
 
+    
     // Current Time
     var currentTime = moment();
     console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
@@ -87,11 +88,11 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     console.log("DIFFERENCE IN TIME: " + diffTime);
 
     // Time apart (remainder)
-    var tRemainder = diffTime % tFrequency;
+    var tRemainder = diffTime % frequency;
     console.log(tRemainder);
 
     // Minute Until Train
-    var tMinutesTillTrain = tFrequency - tRemainder;
+    var tMinutesTillTrain = frequency - tRemainder;
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
     // Next Train
@@ -100,7 +101,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
   // Add each train's data into the table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
-  frequency + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td><td>");
+  frequency + "</td><td>" +  moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "</td><td>");
 });
 
 
